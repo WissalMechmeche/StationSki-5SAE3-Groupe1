@@ -15,5 +15,11 @@ public interface ICourseServices {
 
     Course retrieveCourse(Long numCourse);
 
+    void deleteCourse(Long numCourse);
+
+    public Course applyDiscount(Long courseId);
+
+    public List<Course> searchCourses(Integer level, TypeCourse typeCourse, Float minPrice, Float maxPrice, String location);
+
 
 }

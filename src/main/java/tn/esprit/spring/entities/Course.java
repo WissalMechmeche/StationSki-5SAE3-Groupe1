@@ -6,11 +6,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
@@ -18,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @Entity
+@Builder
 public class Course implements Serializable {
 
 	@Id
@@ -30,6 +27,10 @@ public class Course implements Serializable {
 	Support support;
 	Float price;
 	int timeSlot;
+
+	// New attributs
+	String description;
+	String location;
 
 	@JsonIgnore
 	@OneToMany(mappedBy= "course")

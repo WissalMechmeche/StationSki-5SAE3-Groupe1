@@ -44,7 +44,8 @@ public class CourseServicesImplTest {
         // Assertions to verify the discount was applied correctly
         Assertions.assertNotNull(discountedCourse.getNumCourse(), "The saved course should have a generated ID");
         Assertions.assertEquals(160.0F, discountedCourse.getPrice(), "Price after 20% discount should be 160.0F");
-        Assertions.assertEquals(TypeCourse.COLLECTIVE_CHILDREN, discountedCourse.getTypeCourse(), "TypeCourse should still be COLLECTIVE_CHILDREN");
+        Assertions.assertEquals(TypeCourse.COLLECTIVE_CHILDREN,
+                discountedCourse.getTypeCourse(), "TypeCourse should still be COLLECTIVE_CHILDREN");
 
         // Clean up the test data by deleting the course
         courseService.deleteCourse(discountedCourse.getNumCourse());
@@ -79,7 +80,8 @@ public class CourseServicesImplTest {
 
         // Assertions pour vérifier les résultats
         Assertions.assertEquals(1, results.size(), "Il devrait y avoir 1 cours correspondant à la recherche");
-        Assertions.assertEquals("Cours collectif pour enfants", results.get(0).getDescription(), "La description doit correspondre");
+        Assertions.assertEquals("Cours collectif pour enfants", results.get(0).getDescription(),
+                "La description doit correspondre");
 
         // Nettoyage des données de test
         courseService.deleteCourse(course1.getNumCourse());

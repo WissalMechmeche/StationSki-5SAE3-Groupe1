@@ -30,4 +30,7 @@ public class Subscription implements Serializable {
 //	@Enumerated(EnumType.STRING)
 	TypeSubscription typeSub;
 
+  public void setNumSub(Long numSub) {
+    this.numSub = numSub;
+  }
 }

@@ -18,10 +18,10 @@ public class CourseRestController {
     
     private final ICourseServices courseServices;
 
-    @Operation(description = "Test webhooks")
+    @Operation(description = "Test webhookss")
     @GetMapping("/test")
     public String testWebhooks(){
-        return "Test webhooks";
+        return "Test webhookss";
     }
 
     @Operation(description = "Add Course")

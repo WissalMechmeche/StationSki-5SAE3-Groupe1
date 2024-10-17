@@ -22,4 +22,5 @@ public interface ICourseServices {
     public List<Course> searchCourses(Integer level, TypeCourse typeCourse, Float minPrice, Float maxPrice, String location);
 
 
+
 }

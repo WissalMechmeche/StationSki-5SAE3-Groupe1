@@ -1,6 +1,8 @@
 package tn.esprit.spring.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -35,5 +37,7 @@ public class Course implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy= "course")
 	Set<Registration> registrations;
+
+
 
 }

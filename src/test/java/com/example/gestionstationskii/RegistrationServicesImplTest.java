@@ -3,6 +3,7 @@ package com.example.gestionstationskii;
 import com.example.gestionstationskii.entities.Course;
 import com.example.gestionstationskii.entities.Registration;
 import com.example.gestionstationskii.entities.Skier;
+import com.example.gestionstationskii.entities.TypeCourse;
 import com.example.gestionstationskii.repositories.ICourseRepository;
 import com.example.gestionstationskii.repositories.IRegistrationRepository;
 import com.example.gestionstationskii.repositories.ISkierRepository;
@@ -15,9 +16,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RegistrationServicesImplTest {
@@ -90,5 +93,32 @@ public class RegistrationServicesImplTest {
         verify(registrationRepository).findById(1L);
         verify(courseRepository).findById(1L);
         verify(registrationRepository).save(Mockito.any(Registration.class));
+    }
+
+    @Test
+    public void testAddRegistrationAndAssignToSkierAndCourse_Success() {
+        Registration registration = new Registration();
+        registration.setNumWeek(1);
+        Long skierId = 1L;
+        Long courseId = 2L;
+
+        Skier skier = new Skier();
+        skier.setNumSkier(skierId);
+        skier.setDateOfBirth(LocalDate.of(2000, 1, 1)); // 24 ans
+
+        Course course = new Course();
+        course.setNumCourse(courseId);
+        course.setTypeCourse(TypeCourse.COLLECTIVE_CHILDREN);
+
+        when(skierRepository.findById(skierId)).thenReturn(Optional.of(skier));
+        when(courseRepository.findById(courseId)).thenReturn(Optional.of(course));
+        when(registrationRepository.countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse(1, skierId, courseId)).thenReturn(0L);
+        when(registrationRepository.save(Mockito.any(Registration.class))).thenReturn(registration);
+
+        Registration result = registrationService.addRegistrationAndAssignToSkierAndCourse(registration, skierId, courseId);
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(skier, result.getSkier());
+        Assertions.assertEquals(course, result.getCourse());
     }
 }

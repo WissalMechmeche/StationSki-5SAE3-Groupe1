@@ -13,6 +13,7 @@ import java.util.List;
 @Tag(name = "\uD83D\uDCDA Course Management")
 @RestController
 @RequestMapping("/course")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class CourseRestController {
     

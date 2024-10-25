@@ -12,7 +12,6 @@ import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Tag(name = "\uD83D\uDCDA Course Management")
 @RestController

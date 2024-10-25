@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import tn.esprit.spring.DTO.CourseDTO;
+import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Support;
 import tn.esprit.spring.entities.TypeCourse;
@@ -43,8 +43,9 @@ public class CourseRestController {
         return courseServices.retrieveAllCourses()
                 .stream()
                 .map(this::mapToDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
+
 
     @Operation(description = "Update Course")
     @PutMapping("/update")

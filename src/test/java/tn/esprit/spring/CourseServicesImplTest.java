@@ -26,7 +26,7 @@ public class CourseServicesImplTest {
 
 
     @Test
-    public void testApplyDiscount() {
+    void testApplyDiscount() {
         Course course = Course.builder()
                 .level(1)
                 .typeCourse(TypeCourse.COLLECTIVE_CHILDREN)
@@ -47,7 +47,7 @@ public class CourseServicesImplTest {
     }
 
     @Test
-    public void testSearchCourses() {
+    void testSearchCourses() {
         Course course1 = Course.builder()
                 .level(1)
                 .typeCourse(TypeCourse.COLLECTIVE_CHILDREN)

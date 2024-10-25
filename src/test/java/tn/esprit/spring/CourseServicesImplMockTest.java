@@ -31,7 +31,7 @@ public class CourseServicesImplMockTest {
     private ICourseRepository courseRepository;
 
     @Test
-    public void testApplyDiscount() {
+    void testApplyDiscount() {
 
         Course course = Course.builder().numCourse(1L).level(1)
                 .typeCourse(TypeCourse.COLLECTIVE_CHILDREN).price(200.0F)
@@ -62,7 +62,7 @@ public class CourseServicesImplMockTest {
     }
 
     @Test
-    public void testSearchCourses() {
+    void testSearchCourses() {
 
         Course course1 = Course.builder()
                 .level(1).typeCourse(TypeCourse.COLLECTIVE_CHILDREN).price(50.0F).timeSlot(1)

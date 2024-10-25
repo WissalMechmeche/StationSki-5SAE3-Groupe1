@@ -19,7 +19,7 @@ import java.util.List;
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
-public class CourseServicesImplTest {
+class CourseServicesImplTest {
 
     @Autowired
     private CourseServicesImpl courseService ;
@@ -76,7 +76,7 @@ public class CourseServicesImplTest {
         Assertions.assertEquals("Cours collectif pour enfants", results.get(0).getDescription(),
                 "La description doit correspondre");
 
-        // Nettoyage des données de test
+
         courseService.deleteCourse(course1.getNumCourse());
         courseService.deleteCourse(course2.getNumCourse());
     }

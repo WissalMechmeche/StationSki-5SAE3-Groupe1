@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
-public class CourseServicesImplMockTest {
+class CourseServicesImplMockTest {
     @InjectMocks
     private CourseServicesImpl courseService;
 
@@ -68,9 +68,7 @@ public class CourseServicesImplMockTest {
                 .level(1).typeCourse(TypeCourse.COLLECTIVE_CHILDREN).price(50.0F).timeSlot(1)
                 .location("Paris").description("Cours collectif pour enfants").build();
 
-        Course course2 = Course.builder()
-                .level(2).typeCourse(TypeCourse.INDIVIDUAL).price(100.0F).timeSlot(2)
-                .location("Lyon").description("Cours individuel pour adultes").build();
+
 
 
         Mockito.when(courseRepository.findAllByCriteria(Mockito.anyInt(), Mockito.isNull(), Mockito.isNull(), Mockito.isNull(),

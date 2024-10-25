@@ -2,6 +2,7 @@ version: '3.9'
 services:
   db-mysql:
     image: "mysql:latest"
+    container_name: mysql
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -15,6 +16,7 @@ services:
     depends_on:
       - db-mysql
     image: wissalmechmeche/stationski:1.0
+    container_name: stationski
     restart: on-failure
     ports:
       - "8089:8089"

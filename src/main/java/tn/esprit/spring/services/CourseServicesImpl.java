@@ -40,31 +40,31 @@ public class CourseServicesImpl implements  ICourseServices{
     }
     @Override
     public Course applyDiscount(Long courseId) {
-        // Fetch the course from the repository
+
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-        // Define discount percentages based on the course type
+
         float discountPercentage;
         switch (course.getTypeCourse()) {
             case COLLECTIVE_CHILDREN:
-                discountPercentage = 20.0F; // 20% discount for collective children courses
+                discountPercentage = 20.0F;
                 break;
             case COLLECTIVE_ADULT:
-                discountPercentage = 15.0F; // 15% discount for collective adult courses
+                discountPercentage = 15.0F;
                 break;
             case INDIVIDUAL:
-                discountPercentage = 10.0F; // 10% discount for individual courses
+                discountPercentage = 10.0F;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown course type");
         }
 
-        // Calculate the discounted price
+
         float discountAmount = course.getPrice() * (discountPercentage / 100);
         float newPrice = course.getPrice() - discountAmount;
 
-        // Set the new price and save the course
+
         course.setPrice(newPrice);
         return courseRepository.save(course);
     }

@@ -3,15 +3,21 @@ package tn.esprit.spring.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
+import tn.esprit.spring.entities.CourseMapper;
 import tn.esprit.spring.entities.Support;
 import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Tag(name = "\uD83D\uDCDA Course Management")
 @RestController
@@ -22,71 +28,52 @@ public class CourseRestController {
 
     private final ICourseServices courseServices;
 
+    private final CourseMapper courseMapper;
+
 
     @Operation(description = "Add Course")
     @PostMapping("/add")
-    public CourseDTO addCourse(@RequestBody CourseDTO courseDTO) {
-        Course course = mapToEntity(courseDTO);
-        Course savedCourse = courseServices.addCourse(course);
-        return mapToDTO(savedCourse);
+    public ResponseEntity<CourseDTO> addCourse(@Valid @RequestBody CourseDTO courseDTO) {
+        Course savedCourse = courseServices.addCourse(courseMapper.toEntity(courseDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseMapper.toDTO(savedCourse));
     }
+
 
     @Operation(description = "Retrieve all Courses")
     @GetMapping("/all")
-    public List<CourseDTO> getAllCourses() {
-        return courseServices.retrieveAllCourses()
-                .stream()
-                .map(this::mapToDTO)
-                .toList();
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        List<CourseDTO> courseDTOS = courseServices.retrieveAllCourses().stream()
+                .map(courseMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(courseDTOS);
     }
 
 
     @Operation(description = "Update Course")
     @PutMapping("/update")
-    public CourseDTO updateCourse(@RequestBody CourseDTO courseDTO) {
-        Course course = mapToEntity(courseDTO);
+    public ResponseEntity<CourseDTO> updateCourse(@Valid @RequestBody CourseDTO courseDTO) {
+        Course course = courseMapper.toEntity(courseDTO); // Use the mapper
         Course updatedCourse = courseServices.updateCourse(course);
-        return mapToDTO(updatedCourse);
+        return ResponseEntity.ok(courseMapper.toDTO(updatedCourse)); // Use the mapper
     }
 
     @Operation(description = "Retrieve Course by Id")
     @GetMapping("/get/{id-course}")
-    public CourseDTO getById(@PathVariable("id-course") Long numCourse) {
+    public ResponseEntity<CourseDTO> getById(@PathVariable("id-course") Long numCourse) {
         Course course = courseServices.retrieveCourse(numCourse);
-        return mapToDTO(course);
+        if (course == null) {
+            throw new EntityNotFoundException("Course not found with ID " + numCourse);
+        }
+        return ResponseEntity.ok(courseMapper.toDTO(course)); // Use the mapper
     }
 
     @Operation(description = "Delete Course by Id")
     @DeleteMapping("/delete/{id-course}")
-    public void deleteCourse(@PathVariable("id-course") Long numCourse) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable("id-course") Long numCourse) {
         courseServices.deleteCourse(numCourse);
+        return ResponseEntity.noContent().build();
     }
 
 
-    private Course mapToEntity(CourseDTO courseDTO) {
-        return Course.builder()
-                .numCourse(courseDTO.getNumCourse())
-                .level(courseDTO.getLevel())
-                .typeCourse(TypeCourse.valueOf(courseDTO.getTypeCourse()))
-                .support(Support.valueOf(courseDTO.getSupport()))
-                .price(courseDTO.getPrice())
-                .timeSlot(courseDTO.getTimeSlot())
-                .description(courseDTO.getDescription())
-                .location(courseDTO.getLocation())
-                .build();
-    }
 
-
-    private CourseDTO mapToDTO(Course course) {
-        return new CourseDTO(
-                course.getNumCourse(),
-                course.getLevel(),
-                course.getTypeCourse().name(),
-                course.getSupport().name(),
-                course.getPrice(),
-                course.getTimeSlot(),
-                course.getDescription(),
-                course.getLocation()
-        );
-    }
 }

@@ -61,6 +61,12 @@ public class CourseRestController {
         return mapToDTO(course);
     }
 
+    @Operation(description = "Delete Course by Id")
+    @DeleteMapping("/delete/{id-course}")
+    public void deleteCourse(@PathVariable("id-course") Long numCourse) {
+        courseServices.deleteCourse(numCourse);
+    }
+
 
     private Course mapToEntity(CourseDTO courseDTO) {
         return Course.builder()

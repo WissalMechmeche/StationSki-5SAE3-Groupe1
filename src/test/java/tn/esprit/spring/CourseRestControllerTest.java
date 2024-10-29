@@ -40,7 +40,7 @@ public class CourseRestControllerTest {
     private CourseDTO courseDTO;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         course = new Course();
         course.setNumCourse(1L);
         course.setDescription("Test Course");
@@ -51,7 +51,7 @@ public class CourseRestControllerTest {
     }
 
     @Test
-    public void testGetAllCourses() {
+    void testGetAllCourses() {
         List<Course> courses = new ArrayList<>();
         courses.add(course);
 
@@ -78,7 +78,7 @@ public class CourseRestControllerTest {
 
 
     @Test
-    public void testAddCourse() {
+    void testAddCourse() {
         when(courseMapper.toEntity(any(CourseDTO.class))).thenReturn(course);
         when(courseServices.addCourse(any(Course.class))).thenReturn(course);
         when(courseMapper.toDTO(any(Course.class))).thenReturn(courseDTO);
@@ -98,7 +98,7 @@ public class CourseRestControllerTest {
 
 
     @Test
-    public void testUpdateCourse() {
+    void testUpdateCourse() {
         when(courseMapper.toEntity(any(CourseDTO.class))).thenReturn(course);
         when(courseServices.updateCourse(any(Course.class))).thenReturn(course);
         when(courseMapper.toDTO(any(Course.class))).thenReturn(courseDTO);
@@ -113,7 +113,7 @@ public class CourseRestControllerTest {
 
 
     @Test
-    public void testDeleteCourse() {
+    void testDeleteCourse() {
         doNothing().when(courseServices).deleteCourse(1L);
 
         ResponseEntity<Void> response = courseRestController.deleteCourse(1L);

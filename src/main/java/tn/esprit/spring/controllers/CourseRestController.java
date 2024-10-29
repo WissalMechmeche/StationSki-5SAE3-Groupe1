@@ -22,11 +22,6 @@ public class CourseRestController {
 
     private final ICourseServices courseServices;
 
-    @Operation(description = "Test webhooks")
-    @GetMapping("/test")
-    public String testWebhooks() {
-        return "Test webhooks";
-    }
 
     @Operation(description = "Add Course")
     @PostMapping("/add")

@@ -5,8 +5,9 @@ services:
     container_name: mysql
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=stationski
+      - MYSQL_ROOT_PASSWORD:root
+      - MYSQL_DATABASE:stationski
+      - MYSQL_PASSWORD:root
     ports:
       - "3306:3306"
     volumes:
@@ -30,8 +31,8 @@ services:
       }'
     stdin_open: true
     tty: true
-volumes:
-  db:
+    volumes:
+      - .m2:/root/.m2
 
 
 

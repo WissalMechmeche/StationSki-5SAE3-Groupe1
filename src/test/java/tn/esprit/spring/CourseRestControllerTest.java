@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
-public class CourseRestControllerTest {
+class CourseRestControllerTest {
 
     @Mock
     private ICourseServices courseServices;

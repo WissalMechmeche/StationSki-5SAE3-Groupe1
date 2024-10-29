@@ -15,7 +15,6 @@ import tn.esprit.spring.services.ICourseServices;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Tag(name = "\uD83D\uDCDA Course Management")
 @RestController
@@ -42,7 +41,7 @@ public class CourseRestController {
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
         List<CourseDTO> courseDTOS = courseServices.retrieveAllCourses().stream()
                 .map(courseMapper::toDTO)
-                .toList();  // Utilisation de Stream.toList() à la place de Collectors.toList()
+                .toList();
         return ResponseEntity.ok(courseDTOS);
     }
 
@@ -50,9 +49,9 @@ public class CourseRestController {
     @Operation(description = "Update Course")
     @PutMapping("/update")
     public ResponseEntity<CourseDTO> updateCourse(@Valid @RequestBody CourseDTO courseDTO) {
-        Course course = courseMapper.toEntity(courseDTO); // Use the mapper
+        Course course = courseMapper.toEntity(courseDTO);
         Course updatedCourse = courseServices.updateCourse(course);
-        return ResponseEntity.ok(courseMapper.toDTO(updatedCourse)); // Use the mapper
+        return ResponseEntity.ok(courseMapper.toDTO(updatedCourse));
     }
 
     @Operation(description = "Retrieve Course by Id")
@@ -62,7 +61,7 @@ public class CourseRestController {
         if (course == null) {
             throw new EntityNotFoundException("Course not found with ID " + numCourse);
         }
-        return ResponseEntity.ok(courseMapper.toDTO(course)); // Use the mapper
+        return ResponseEntity.ok(courseMapper.toDTO(course));
     }
 
     @Operation(description = "Delete Course by Id")

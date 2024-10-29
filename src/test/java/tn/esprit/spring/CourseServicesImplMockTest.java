@@ -35,11 +35,12 @@ class CourseServicesImplMockTest {
     @Mock
     private ICourseRepository courseRepository;
 
+    @InjectMocks
     private final CourseMapper courseMapper = new CourseMapper();
 
     @Test
     void testToEntity() {
-        CourseDTO courseDTO = new CourseDTO(1L, 1, "COLLECTIVE_CHILDREN", "SKI", 100.0F, 2, "Sample Course", "Paris");
+        CourseDTO courseDTO = new CourseDTO(1L, 1, TypeCourse.COLLECTIVE_CHILDREN, Support.SKI, 100.0F, 2, "Sample Course", "Paris");
 
         Course course = courseMapper.toEntity(courseDTO);
 
@@ -70,8 +71,8 @@ class CourseServicesImplMockTest {
 
         assertEquals(1L, courseDTO.getNumCourse());
         assertEquals(1, courseDTO.getLevel());
-        assertEquals("COLLECTIVE_CHILDREN", courseDTO.getTypeCourse());
-        assertEquals("SKI", courseDTO.getSupport());
+        assertEquals(TypeCourse.COLLECTIVE_CHILDREN, courseDTO.getTypeCourse());
+        assertEquals(Support.SKI, courseDTO.getSupport());
         assertEquals(100.0F, courseDTO.getPrice());
         assertEquals(2, courseDTO.getTimeSlot());
         assertEquals("Sample Course", courseDTO.getDescription());

@@ -10,8 +10,8 @@ public class CourseMapper {
         return new CourseDTO(
                 course.getNumCourse(),
                 course.getLevel(),
-                course.getTypeCourse().name(),
-                course.getSupport().name(),
+                course.getTypeCourse(),
+                course.getSupport(),
                 course.getPrice(),
                 course.getTimeSlot(),
                 course.getDescription(),
@@ -23,8 +23,8 @@ public class CourseMapper {
         return Course.builder()
                 .numCourse(courseDTO.getNumCourse())
                 .level(courseDTO.getLevel())
-                .typeCourse(TypeCourse.valueOf(courseDTO.getTypeCourse()))
-                .support(Support.valueOf(courseDTO.getSupport()))
+                .typeCourse(courseDTO.getTypeCourse())
+                .support(courseDTO.getSupport())
                 .price(courseDTO.getPrice())
                 .timeSlot(courseDTO.getTimeSlot())
                 .description(courseDTO.getDescription())

@@ -31,8 +31,8 @@ services:
       }'
     stdin_open: true
     tty: true
-    volumes:
-      - .m2:/root/.m2
+volumes:
+  db:
 
 
 

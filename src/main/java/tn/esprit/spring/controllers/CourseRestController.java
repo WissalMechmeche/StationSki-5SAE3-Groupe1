@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.CourseMapper;
-import tn.esprit.spring.entities.Support;
-import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
 import javax.persistence.EntityNotFoundException;
@@ -44,7 +42,7 @@ public class CourseRestController {
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
         List<CourseDTO> courseDTOS = courseServices.retrieveAllCourses().stream()
                 .map(courseMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();  // Utilisation de Stream.toList() à la place de Collectors.toList()
         return ResponseEntity.ok(courseDTOS);
     }
 

@@ -1,6 +1,8 @@
 package tn.esprit.spring.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Instructor;
@@ -45,6 +47,13 @@ public class InstructorServicesImpl implements IInstructorServices{
         courseSet.add(course);
         instructor.setCourses(courseSet);
         return instructorRepository.save(instructor);
+    }
+    public List<Instructor> retrieveInstructorsWithPagination(int page, int size) {
+        Page<Instructor> pagedInstructors = instructorRepository.findAll(PageRequest.of(page, size));
+        return pagedInstructors.getContent();
+    }
+    public List<Instructor> searchInstructorsByLastName(String lastName) {
+        return instructorRepository.findByLastNameContaining(lastName);
     }
 
 

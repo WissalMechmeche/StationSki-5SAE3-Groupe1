@@ -27,5 +27,6 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     stdin_open: true
     tty: true
+
 volumes:
   db:

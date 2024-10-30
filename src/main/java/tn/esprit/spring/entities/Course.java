@@ -16,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @Entity
 @Builder
+@Table(name = "course")
 public class Course implements Serializable {
 
 	@Id

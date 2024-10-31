@@ -1,14 +1,12 @@
-# Use the official OpenJDK 17 image as the base
+# Use a base image with Java 17
 FROM openjdk:17
 
-# Set the working directory (optional but good practice)
-WORKDIR /app
+# Copy the JAR package into the image
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
-# Expose the port the application will run on
-EXPOSE 8089
+# Expose the application port
+EXPOSE 8081
 
-# Copy the JAR file from the target directory to the working directory in the container
-COPY target/gestion-station-ski-1.0.jar app.jar
-
-# Set the entrypoint to run the application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Run the App
+ENTRYPOINT ["java", "-jar", "/app.jar"]

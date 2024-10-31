@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   db-mysql:
     image: "mysql:latest"
@@ -15,7 +14,7 @@ services:
   station-ski:
     depends_on:
       - db-mysql
-    image: mahamaatoug/stationski:1.0
+    build: .  # Builds the Docker image locally
     restart: on-failure
     ports:
       - "8089:8089"
@@ -27,5 +26,6 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     stdin_open: true
     tty: true
+
 volumes:
   db:

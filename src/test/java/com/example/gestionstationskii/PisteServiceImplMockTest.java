@@ -1,2 +1,4 @@
-package com.example.gestionstationskii;public class PisteServiceImpMockTest {
+package com.example.gestionstationskii;
+
+public class PisteServiceImplMockTest {
 }

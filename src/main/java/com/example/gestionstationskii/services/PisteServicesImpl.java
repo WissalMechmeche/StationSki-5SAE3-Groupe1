@@ -45,4 +45,5 @@ public class PisteServicesImpl implements  IPisteServices {
         int total = pistesDetails.size();
         return new PisteResponseDTO(total, pistesDetails);
     }
+
 }

@@ -91,15 +91,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.6.9</version>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-					<outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+					<mainClass>tn.esprit.spring.GestionStationSkiApplication</mainClass> <!-- Spécifiez ici la classe principale -->
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

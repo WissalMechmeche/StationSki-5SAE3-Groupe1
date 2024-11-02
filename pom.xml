@@ -16,6 +16,8 @@
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
+        <sonar.host.url>http://192.168.50.4:9000</sonar.host.url>
+        <sonar.token>squ_6cecadc90593b3f3b0d41b74dfb8bc38ce94118e</sonar.token>
     </properties>
     <dependencyManagement>
         <dependencies>

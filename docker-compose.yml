@@ -14,7 +14,7 @@ services:
   station-ski:
     depends_on:
       - db-mysql
-    build: .  # Builds the Docker image locally
+    image: mahamaatoug/stationski:1.0
     restart: on-failure
     ports:
       - "8089:8089"

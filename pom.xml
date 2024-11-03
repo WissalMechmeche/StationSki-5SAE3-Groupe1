@@ -17,7 +17,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
         <sonar.host.url>http://192.168.50.4:9000</sonar.host.url>
-        <sonar.token>squ_6cecadc90593b3f3b0d41b74dfb8bc38ce94118e</sonar.token>
+        <sonar.login>squ_6cecadc90593b3f3b0d41b74dfb8bc38ce94118e</sonar.login>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -59,7 +59,6 @@
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -109,7 +108,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.9.0.2155</version>
+                <version>4.0.0.4121</version>
             </plugin>
         </plugins>
     </build>

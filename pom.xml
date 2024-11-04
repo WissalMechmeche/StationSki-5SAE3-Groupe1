@@ -12,6 +12,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>gestion-station-skii</name>
     <description>gestion-station-skii</description>
+    <distributionManagement>
+        <repository>
+            <id>deploymentRepo</id>
+            <name>Nexus Repository</name>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
+        </repository>
+    </distributionManagement>
     <properties>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -113,4 +120,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

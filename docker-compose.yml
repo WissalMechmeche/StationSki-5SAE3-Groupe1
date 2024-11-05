@@ -27,6 +27,16 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     stdin_open: true
     tty: true
+  angular-app:
+    build:
+      context: ../StationSki
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - db-mysql
+      - station-ski
+    restart: unless-stopped
 
 volumes:
   db:

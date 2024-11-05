@@ -28,9 +28,7 @@ services:
     stdin_open: true
     tty: true
   angular-app:
-    build:
-      context: ../StationSki
-      dockerfile: Dockerfile
+    image: wissalmechmeche/stationskifront:1.0
     ports:
       - "4200:4200"
     depends_on:

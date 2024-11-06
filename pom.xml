@@ -14,9 +14,8 @@
     <description>gestion-station-skii</description>
     <distributionManagement>
         <repository>
-            <id>deploymentRepo</id>
-            <name>Nexus Repository</name>
-            <url>http://192.168.50.4:8081/#browse/browse:maven-releases</url>
+            <id>nexus-releases</id>
+            <url>http://192.168.50.4:8081/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
     <properties>

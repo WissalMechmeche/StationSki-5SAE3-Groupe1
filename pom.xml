@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>tn.esprit.spring</groupId>
 	<artifactId>gestion-station-ski</artifactId>
 	<version>1.0</version>
@@ -17,30 +19,41 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-		<sonar.host.url>http://192.168.33.10:9000</sonar.host.url> <!-- URL de votre serveur SonarQube -->
-		<sonar.login>sqa_e60d22361cd3fd9c0c35922be0d0b896866fe056</sonar.login> <!-- Remplacez par votre token SonarQube -->
+		<!-- URL du serveur SonarQube -->
+		<sonar.host.url>http://192.168.33.10:9000</sonar.host.url> <!-- Assurez-vous que cette URL est correcte -->
+		<!-- Token SonarQube via une variable d'environnement -->
+		<sonar.login>sqa_28221775dcdee3c4592c44b4b6992591f4d9af9f</sonar.login> <!-- Assurez-vous de définir la variable d'environnement SONAR_TOKEN -->
 	</properties>
 
 	<dependencies>
+		<!-- Spring Boot Starter Data JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<!-- Spring Boot Starter Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!-- Spring Boot DevTools pour le développement -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- MySQL Connector (si vous utilisez MySQL) -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Lombok pour la gestion des getters/setters et autres -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -48,11 +61,15 @@
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- Springdoc OpenAPI UI pour la documentation API -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.12</version>
 		</dependency>
+
+		<!-- Spring Boot Starter Test pour les tests unitaires -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -88,8 +105,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>9</source>
-					<target>9</target>
+					<source>1.8</source>  <!-- Assurez-vous d'utiliser une version de Java 8 -->
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>

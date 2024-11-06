@@ -1,11 +1,8 @@
 package tn.esprit.spring;
 
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,15 +42,12 @@ class SubscriptionRestControllerTest {
         subscription.setPrice(99.99f);
         subscription.setTypeSub(TypeSubscription.ANNUAL);
 
-        // Simulez le comportement du service
         when(subscriptionServices.addSubscription(any(Subscription.class))).thenReturn(subscription);
 
-        // Appelez la méthode du contrôleur
         Subscription result = subscriptionRestController.addSubscription(subscription);
 
-        // Vérifiez que le résultat est correct
+        assertNotNull(result);
         assertEquals(subscription, result);
-        // Vérifiez que la méthode du service a été appelée
         verify(subscriptionServices, times(1)).addSubscription(subscription);
     }
 
@@ -70,20 +64,46 @@ class SubscriptionRestControllerTest {
 
         Subscription result = subscriptionRestController.getById(1L);
 
+        assertNotNull(result);
         assertEquals(subscription, result);
         verify(subscriptionServices, times(1)).retrieveSubscriptionById(1L);
     }
 
     @Test
+    void testGetByIdNotFound() {
+        when(subscriptionServices.retrieveSubscriptionById(999L)).thenReturn(null);
+
+        Subscription result = subscriptionRestController.getById(999L);
+
+        assertNull(result);
+        verify(subscriptionServices, times(1)).retrieveSubscriptionById(999L);
+    }
+
+    @Test
     void testGetSubscriptionsByType() {
         Set<Subscription> subscriptions = new HashSet<>();
-        subscriptions.add(new Subscription(1L, LocalDate.now(), LocalDate.now().plusDays(30), 99.99f, TypeSubscription.ANNUAL));
+        Subscription sub1 = new Subscription(1L, LocalDate.now(), LocalDate.now().plusDays(30), 99.99f, TypeSubscription.ANNUAL);
+        subscriptions.add(sub1);
+
         when(subscriptionServices.getSubscriptionByType(TypeSubscription.ANNUAL)).thenReturn(subscriptions);
 
         Set<Subscription> result = subscriptionRestController.getSubscriptionsByType(TypeSubscription.ANNUAL);
 
+        assertNotNull(result);
         assertEquals(1, result.size());
         verify(subscriptionServices, times(1)).getSubscriptionByType(TypeSubscription.ANNUAL);
+    }
+
+    @Test
+    void testGetSubscriptionsByTypeEmpty() {
+        Set<Subscription> subscriptions = new HashSet<>();
+        when(subscriptionServices.getSubscriptionByType(TypeSubscription.MONTHLY)).thenReturn(subscriptions);
+
+        Set<Subscription> result = subscriptionRestController.getSubscriptionsByType(TypeSubscription.MONTHLY);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(subscriptionServices, times(1)).getSubscriptionByType(TypeSubscription.MONTHLY);
     }
 
     @Test
@@ -99,8 +119,27 @@ class SubscriptionRestControllerTest {
 
         Subscription result = subscriptionRestController.updateSubscription(subscription);
 
+        assertNotNull(result);
         assertEquals(subscription, result);
         verify(subscriptionServices, times(1)).updateSubscription(subscription);
+    }
+
+    @Test
+    void testUpdateSubscriptionWithInvalidData() {
+        Subscription invalidSubscription = new Subscription();
+        invalidSubscription.setNumSub(1L);
+        invalidSubscription.setStartDate(LocalDate.now().plusDays(1)); // start date in the future
+        invalidSubscription.setEndDate(LocalDate.now()); // end date in the past
+        invalidSubscription.setPrice(-50f); // invalid price
+        invalidSubscription.setTypeSub(TypeSubscription.MONTHLY);
+
+        when(subscriptionServices.updateSubscription(any(Subscription.class))).thenThrow(IllegalArgumentException.class);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            subscriptionRestController.updateSubscription(invalidSubscription);
+        });
+
+        verify(subscriptionServices, times(1)).updateSubscription(invalidSubscription);
     }
 
     @Test
@@ -117,8 +156,21 @@ class SubscriptionRestControllerTest {
 
         List<Subscription> result = subscriptionRestController.getSubscriptionsByDates(LocalDate.now(), LocalDate.now().plusDays(30));
 
+        assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(subscription, result.get(0));
+        verify(subscriptionServices, times(1)).retrieveSubscriptionsByDates(any(LocalDate.class), any(LocalDate.class));
+    }
+
+    @Test
+    void testGetSubscriptionsByDatesEmpty() {
+        List<Subscription> subscriptions = List.of();
+        when(subscriptionServices.retrieveSubscriptionsByDates(any(LocalDate.class), any(LocalDate.class))).thenReturn(subscriptions);
+
+        List<Subscription> result = subscriptionRestController.getSubscriptionsByDates(LocalDate.now(), LocalDate.now().plusDays(30));
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
         verify(subscriptionServices, times(1)).retrieveSubscriptionsByDates(any(LocalDate.class), any(LocalDate.class));
     }
 }

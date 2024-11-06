@@ -14,7 +14,7 @@
     <description>gestion-station-skii</description>
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
+            <id>deploymentRepo</id>
             <url>http://192.168.50.4:8081/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
@@ -26,10 +26,6 @@
         <sonar.login>squ_6cecadc90593b3f3b0d41b74dfb8bc38ce94118e</sonar.login>
     </properties>
     <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
     </repositories>
     <dependencyManagement>
         <dependencies>

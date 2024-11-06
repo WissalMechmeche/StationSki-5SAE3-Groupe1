@@ -17,6 +17,10 @@
             <id>deploymentRepo</id>
             <url>http://192.168.50.4:8081/repository/maven-releases/</url>
         </repository>
+        <snapshotRepository>
+            <id>deploymentRepo-snapshots</id>
+            <url>http://192.168.50.4:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
     </distributionManagement>
     <properties>
         <java.version>17</java.version>
@@ -25,18 +29,7 @@
         <sonar.host.url>http://192.168.50.4:9000</sonar.host.url>
         <sonar.login>squ_6cecadc90593b3f3b0d41b74dfb8bc38ce94118e</sonar.login>
     </properties>
-    <repositories>
-    </repositories>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.34</version>
-                <scope>provided</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

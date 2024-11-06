@@ -173,4 +173,22 @@ class SubscriptionRestControllerTest {
         assertTrue(result.isEmpty());
         verify(subscriptionServices, times(1)).retrieveSubscriptionsByDates(any(LocalDate.class), any(LocalDate.class));
     }
+
+    @Test
+    void testAddSubscriptionWithInvalidData() {
+        Subscription invalidSubscription = new Subscription();
+        invalidSubscription.setNumSub(1L);
+        invalidSubscription.setStartDate(LocalDate.now());
+        invalidSubscription.setEndDate(LocalDate.now().minusDays(1)); // Date de fin avant la date de début
+        invalidSubscription.setPrice(-50f); // Prix invalide (négatif)
+        invalidSubscription.setTypeSub(TypeSubscription.MONTHLY);
+
+        when(subscriptionServices.addSubscription(any(Subscription.class))).thenThrow(IllegalArgumentException.class);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            subscriptionRestController.addSubscription(invalidSubscription);
+        });
+
+        verify(subscriptionServices, times(1)).addSubscription(invalidSubscription);
+    }
 }

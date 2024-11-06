@@ -1,5 +1,6 @@
 package com.example.gestionstationskii.services;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import com.example.gestionstationskii.repositories.*;
 
 import com.example.gestionstationskii.entities.*;
 
-import javax.transaction.Transactional;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;

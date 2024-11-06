@@ -2,7 +2,7 @@ package com.example.gestionstationskii.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

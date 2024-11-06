@@ -3,7 +3,7 @@ package com.example.gestionstationskii.entities;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

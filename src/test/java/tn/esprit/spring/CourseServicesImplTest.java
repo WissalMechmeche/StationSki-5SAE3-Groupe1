@@ -1,14 +1,12 @@
 package tn.esprit.spring;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.CourseServicesImpl;
@@ -17,8 +15,7 @@ import java.util.List;
 
 
 
-@ExtendWith(SpringExtension.class)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 @ActiveProfiles("test")
 @SpringBootTest
 class CourseServicesImplTest {

@@ -19,19 +19,9 @@ public class InstructorServicesImpl implements IInstructorServices{
 
     private IInstructorRepository instructorRepository;
     private ICourseRepository courseRepository;
-    private final EmailService emailService;
-
     @Override
     public Instructor addInstructor(Instructor instructor) {
         Instructor savedInstructor = instructorRepository.save(instructor);
-
-        // Envoyer un email de notification
-        String subject = "Nouvel Instructeur Ajouté";
-        String body = "Bonjour,\n\nUn nouvel instructeur a été ajouté : " +
-                instructor.getFirstName() + " " + instructor.getLastName() +
-                ".\n\nCordialement,\nVotre équipe";
-        emailService.sendEmail("prof@universite.com", subject, body);
-
         return savedInstructor;
     }
 
@@ -43,12 +33,6 @@ public class InstructorServicesImpl implements IInstructorServices{
     @Override
     public Instructor updateInstructor(Instructor instructor) {
         Instructor updatedInstructor = instructorRepository.save(instructor);
-
-        // Envoyer un email après la mise à jour
-        String subject = "Instructeur Mis à Jour";
-        String body = "Bonjour,\n\nL'instructeur " + instructor.getFirstName() + " " + instructor.getLastName() +
-                " a été mis à jour.\n\nCordialement,\nVotre équipe";
-        emailService.sendEmail("prof@universite.com", subject, body);
 
         return updatedInstructor;
     }
@@ -65,13 +49,6 @@ public class InstructorServicesImpl implements IInstructorServices{
         instructor.setCourses(courseSet);
 
         Instructor savedInstructor = instructorRepository.save(instructor);
-
-        // Envoyer un email après l'ajout et l'assignation de l'instructeur
-        String subject = "Instructeur Assigné à un Cours";
-        String body = "Bonjour,\n\nL'instructeur " + instructor.getFirstName() + " " + instructor.getLastName() +
-                " a été ajouté et assigné au cours " + course.getName() + ".\n\nCordialement,\nVotre équipe";
-        emailService.sendEmail("prof@universite.com", subject, body);
-
         return savedInstructor;
     }
     public List<Instructor> retrieveInstructorsWithPagination(int page, int size) {

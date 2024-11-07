@@ -42,7 +42,6 @@ public class InstructorServicesImplMockTest {
         Instructor instructor = new Instructor();
         instructor.setFirstName("Farah");
         instructor.setLastName("weslati");
-
         Mockito.when(instructorRepository.save(instructor)).thenReturn(instructor);
         Instructor addedInstructor = instructorService.addInstructor(instructor);
         Assertions.assertNotNull(addedInstructor, "The added instructor should not be null");

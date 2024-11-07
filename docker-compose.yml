@@ -15,7 +15,7 @@ services:
   station-ski:
     depends_on:
       - db-mysql
-    image: gestion-station-skii-0.0.1/stationski:1.0
+    image: elaa917/spring-app:latest
     restart: on-failure
     ports:
       - "8087:8087"

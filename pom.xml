@@ -20,9 +20,9 @@
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<!-- URL du serveur SonarQube -->
-		<sonar.host.url>http://192.168.33.10:9000</sonar.host.url> <!-- Assurez-vous que cette URL est correcte -->
+		<sonar.host.url>http://192.168.33.10:9000</sonar.host.url>
 		<!-- Token SonarQube via une variable d'environnement -->
-		<sonar.login>sqa_28221775dcdee3c4592c44b4b6992591f4d9af9f</sonar.login> <!-- Assurez-vous de définir la variable d'environnement SONAR_TOKEN -->
+		<sonar.login>sqa_28221775dcdee3c4592c44b4b6992591f4d9af9f</sonar.login>
 	</properties>
 
 	<dependencies>
@@ -105,10 +105,40 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>  <!-- Assurez-vous d'utiliser une version de Java 8 -->
+					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<!-- Maven Deploy Plugin pour déployer sur Nexus -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!-- Ajout de la configuration de distributionManagement pour le déploiement vers Nexus -->
+	<distributionManagement>
+		<repository>
+			<id>deploymentRepo</id>  <!-- ID du serveur de Nexus, à configurer dans settings.xml -->
+			<name>Nexus Repository</name>
+			<url>http://localhost:8081/repository/maven-releases/</url>  <!-- URL du dépôt de releases -->
+		</repository>
+
+		<snapshotRepository>
+			<id>deploymentRepo</id>  <!-- ID du serveur de Nexus pour les versions SNAPSHOT -->
+			<name>Nexus Snapshot Repository</name>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>  <!-- URL du dépôt de snapshots -->
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>

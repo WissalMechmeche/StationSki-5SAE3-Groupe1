@@ -11,7 +11,6 @@ import javax.validation.constraints.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CourseDTO {
     @NotNull(message = "Course number cannot be null")

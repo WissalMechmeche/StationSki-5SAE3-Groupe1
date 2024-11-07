@@ -1,0 +1,46 @@
+
+services:
+  # Service pour l'application Spring Boot
+  gestionstationski:
+    image: jesserzaghdoudi/gestion-station-ski:latest
+    # Remplacez par le nom de votre image Docker
+    container_name: gestionstationski-app-container  # Nouveau nom du container
+    ports:
+      - "8089:8089"  # Expose le port 8089 de l'application
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/stationski
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+    depends_on:
+      - db  # Assure que le service "db" (MySQL) soit démarré avant l'application
+    networks:
+      - stationski-network
+    restart: always
+
+  # Service pour la base de données MySQL
+  db:
+    image: mysql:5.7  # Version 5.7 de MySQL
+    container_name: mysql-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=stationski
+    ports:
+      - "3306:3306"  # Expose le port 3306 de MySQL
+    volumes:
+      - db_data:/var/lib/mysql  # Persiste les données de la base de données
+    networks:
+      - stationski-network
+    restart: always
+
+# Définir un réseau pour les services
+networks:
+  stationski-network:
+    driver: bridge
+
+# Volume pour persister les données MySQL
+volumes:
+  db_data:
+    driver: local

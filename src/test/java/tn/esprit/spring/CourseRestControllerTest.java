@@ -14,6 +14,7 @@ import tn.esprit.spring.controllers.CourseRestController;
 import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.CourseMapper;
+import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
 import java.util.ArrayList;
@@ -77,6 +78,8 @@ class CourseRestControllerTest {
     }
 
 
+
+
     @Test
     void testAddCourse() {
         when(courseMapper.toEntity(any(CourseDTO.class))).thenReturn(course);
@@ -92,6 +95,46 @@ class CourseRestControllerTest {
 
         verify(courseServices, times(1)).addCourse(any(Course.class));
     }
+
+    @Test
+    void testGetCourseById() {
+        // Préparation des données
+        Long courseId = 1L;
+
+        Course course = Course.builder()
+                .numCourse(courseId)
+                .level(2)
+                .typeCourse(TypeCourse.COLLECTIVE_ADULT)
+                .price(200.0F)
+                .timeSlot(2)
+                .build();
+
+        CourseDTO courseDTO = CourseDTO.builder()
+                .numCourse(courseId)
+                .level(2)
+                .typeCourse(TypeCourse.COLLECTIVE_ADULT)
+                .price(200.0F)
+                .timeSlot(2)
+                .build();
+
+        // Simulations
+        when(courseServices.retrieveCourse(courseId)).thenReturn(course);
+        when(courseMapper.toDTO(any(Course.class))).thenReturn(courseDTO);
+
+        // Exécution du test
+        ResponseEntity<CourseDTO> response = courseRestController.getById(courseId);
+
+        // Assertions
+        assertNotNull(response, "La réponse ne doit pas être null");
+        assertNotNull(response.getBody(), "Le body de la réponse ne doit pas être null");
+        assertEquals(HttpStatus.OK, response.getStatusCode(), "Le statut HTTP doit être OK");
+        assertEquals(courseDTO, response.getBody(), "Le DTO retourné ne correspond pas au DTO attendu");
+
+        // Vérifications des appels
+        verify(courseServices, times(1)).retrieveCourse(courseId);
+        verify(courseMapper, times(1)).toDTO(any(Course.class));
+    }
+
 
 
 

@@ -22,7 +22,7 @@
 		<!-- URL du serveur SonarQube -->
 		<sonar.host.url>http://192.168.33.10:9000</sonar.host.url>
 		<!-- Token SonarQube via une variable d'environnement -->
-		<sonar.login>sqa_28221775dcdee3c4592c44b4b6992591f4d9af9f</sonar.login>
+		<sonar.login>sqa_98d727b8189426de30214f7d123e974e69a8098a</sonar.login>
 	</properties>
 
 	<dependencies>

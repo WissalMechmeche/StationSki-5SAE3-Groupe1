@@ -14,7 +14,6 @@ import tn.esprit.spring.controllers.CourseRestController;
 import tn.esprit.spring.dto.CourseDTO;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.CourseMapper;
-import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.services.ICourseServices;
 
 import java.util.ArrayList;

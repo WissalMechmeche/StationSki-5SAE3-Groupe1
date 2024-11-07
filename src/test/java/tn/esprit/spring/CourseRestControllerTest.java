@@ -109,7 +109,7 @@ class CourseRestControllerTest {
                 .timeSlot(2)
                 .build();
 
-        CourseDTO courseDTO = CourseDTO.builder()
+        CourseDTO courseDto = CourseDTO.builder()
                 .numCourse(courseId)
                 .level(2)
                 .typeCourse(TypeCourse.COLLECTIVE_ADULT)
@@ -119,7 +119,7 @@ class CourseRestControllerTest {
 
         // Simulations
         when(courseServices.retrieveCourse(courseId)).thenReturn(course);
-        when(courseMapper.toDTO(any(Course.class))).thenReturn(courseDTO);
+        when(courseMapper.toDTO(any(Course.class))).thenReturn(courseDto);
 
         // Exécution du test
         ResponseEntity<CourseDTO> response = courseRestController.getById(courseId);
@@ -128,7 +128,7 @@ class CourseRestControllerTest {
         assertNotNull(response, "La réponse ne doit pas être null");
         assertNotNull(response.getBody(), "Le body de la réponse ne doit pas être null");
         assertEquals(HttpStatus.OK, response.getStatusCode(), "Le statut HTTP doit être OK");
-        assertEquals(courseDTO, response.getBody(), "Le DTO retourné ne correspond pas au DTO attendu");
+        assertEquals(courseDto, response.getBody(), "Le DTO retourné ne correspond pas au DTO attendu");
 
         // Vérifications des appels
         verify(courseServices, times(1)).retrieveCourse(courseId);
